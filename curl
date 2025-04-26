@@ -1,0 +1,11 @@
+curl -X 'POST' \
+  'http://localhost:8000/repos/' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "string",
+  "description": "",
+  "private": false,
+  "readme_content": "# Hello World",
+  "workflow_content": "name: CI Lint\non: [pull_request]\njobs:\n  lint:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v3\n      - name: Set up Python\n        uses: actions/setup-python@v4\n        with:\n          python-version: '\''3.x'\''\n      - name: Install dependencies\n        run: pip install flake8\n      - name: Lint with flake8\n        run: flake8 .\n"
+}'
