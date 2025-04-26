@@ -45,7 +45,7 @@ class RepoCreate(BaseModel):
 @app.post("/repos/")
 async def create_repo(repo: RepoCreate):
     async with httpx.AsyncClient() as client:
-        # 1. Create the repository
+        # Create the repository
         create_payload = {
             "name": repo.name,
             "description": repo.description,
@@ -62,7 +62,7 @@ async def create_repo(repo: RepoCreate):
         data = resp.json()
         owner = data["owner"]["login"]
 
-        # 2. Create README.md
+        # Create README.md
         readme_encoded = base64.b64encode(repo.readme_content.encode()).decode()
         readme_payload = {
             "message": "Add README.md",
@@ -76,7 +76,7 @@ async def create_repo(repo: RepoCreate):
         if resp2.status_code >= 300:
             raise HTTPException(status_code=resp2.status_code, detail=resp2.text)
 
-        # 3. Create GitHub Actions workflow
+        # Create GitHub Actions workflow
         workflow_path = ".github/workflows/lint.yml"
         workflow_encoded = base64.b64encode(repo.workflow_content.encode()).decode()
         workflow_payload = {
