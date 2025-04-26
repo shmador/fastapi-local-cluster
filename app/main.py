@@ -1,10 +1,3 @@
-# Directory structure
-# .
-# ├── app
-# │   └── main.py
-# ├── requirements.txt
-# └── .env.example
-
 # app/main.py
 import os
 import base64
@@ -103,14 +96,4 @@ async def create_repo(repo: RepoCreate):
         "readme_url": resp2.json().get("content", {}).get("html_url"),
         "workflow_url": resp3.json().get("content", {}).get("html_url")
     }
-
-# requirements.txt
-# ----------------
-# fastapi
-# uvicorn[standard]
-# httpx
-
-# .env.example
-# ----------------
-# GITHUB_TOKEN=ghp_your_personal_access_token_here
 
